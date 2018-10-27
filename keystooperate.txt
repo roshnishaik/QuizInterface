@@ -1,0 +1,13 @@
+keys used in the interface:
+
+q->next question
+a->correct answer add score
+s->start 5th round
+s->see scores at each round
+w->reveal answer don't add scores
+t->start timer
+n->next round,next team for the round
+enter->go to audience questions and sometimes next round or see scores
+
+1,2,3,4,5,6,7,8,9.
+used at some rounds to select options or domains corresponding to the numbers.

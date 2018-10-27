@@ -1,0 +1,68 @@
+<?PHP
+$con=mysqli_connect("localhost","quest2k1_4cse","quest2k14","quest2k1_4cse");
+$query=mysqli_query($con,"select * from participantdetails");
+$emailiderr=$passworderr="";
+$flag=0;
+	 if (empty($_POST["emailid"]))
+     {
+		$emailiderr = "emailid is required";
+	 }	
+	 else
+	 {
+		 $emailid=$_POST['emailid'];
+		 $flag=1;
+	 }	
+	if($flag==1)
+	{
+	//	echo "17";
+		while($row=mysqli_fetch_array($query))
+		{
+		//	echo "20";
+			if($emailid==$row['emailid'])
+			{
+				$password=$_POST['password'];
+				if($password==$row['password'])
+				{
+					//echo "26";
+					$ans=$_POST['answer'];
+					$current_time = date("Y-m-d H:i:s");
+					$qquery="create table dailyquizcompetetion1(emailid varchar(30),password varchar(30),answer varchar(30),submissiontime timestamp,primary key(emailid))";
+					mysqli_query($con,$qquery);
+
+		if(mysqli_query($con,"insert into dailyquizcompetetion1 values('$emailid','$password','$ans','$current_time')"))
+					{
+						//echo "34";
+				/*		header('Location:/questionvalidation5.html');
+				*/	
+					echo "<h1>YOUR ANSWER HAS BEEN RECEIVED</h1>";
+					}
+					else
+					{
+						echo "<h1> YOU HAVE ALREADY ANSWERED</h1>";
+						//echo "39";
+				/*		header('Location:/questionvalidation6.html');
+				*/	}
+			
+				/*header('Location:/changed website/questionvalidation3.php');
+				break;*/
+				}
+				else
+				{
+					echo "incorrect login";
+					break;
+				}
+			}
+		}
+	}
+	else
+		{
+			if (empty($_POST["password"]))
+			{
+				$passworderr = "password is required.";
+			}	
+			else
+			{
+				$passworderr = "Please enter your email-id.";
+			}
+		}
+?>
